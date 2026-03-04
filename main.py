@@ -25,3 +25,42 @@ TEXTS = [
     in modern oceans. Other fish such as paddlefish,
     garpike and stingray are also present.'''
 ]
+
+user = {
+    "bob": "123",
+    "ann": "pass123", 
+    "mike": "password123",
+    "liz": "pass123"
+}
+
+# Přihlášení
+username = input("username: ")
+password = input("password: ")
+
+if username not in user or user[username] != password:
+    print("unregistered user, terminating the program..")  # Ukončení programu
+else:  # Výstup přihlášení
+    print(f"""{'-' * 42}
+Welcome to the app, {username}
+We have {len(TEXTS)} texts to be analyzed.
+{'-' * 42}""")
+    
+    # Vstup: výběr textu
+    choice_text = input("Enter a number between 1 and " + 
+                        str(len(TEXTS)) + " to select: ")
+    
+    valid_number = False
+    for char in choice_text:
+        if not (char.isdigit()):
+            print("Letter entered!")  # Zadáno písmeno
+            valid_number = False
+            break
+        else:
+            valid_number = True
+    else:
+        choice = int(choice_text)  # Převod na číslo
+        if choice < 1 or choice > len(TEXTS):
+            print("Invalid text number!")  # Zadáno číslo mimo rozsah
+        else:
+            valid_number = True
+           
