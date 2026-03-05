@@ -63,4 +63,45 @@ We have {len(TEXTS)} texts to be analyzed.
             print("Invalid text number!")  # Zadáno číslo mimo rozsah
         else:
             valid_number = True
-           
+
+    if valid_number:
+        if 1 <= choice <= len(TEXTS):  # Kontrola rozsahu
+            text = TEXTS[choice - 1]
+            words = text.split()  # Rozdělení na slova podle mezer
+
+            number_words = len(words)  # Celkový počet slov
+            title_words = 0
+            uppercase_words = 0  # Slova velkými písmeny
+            lower_words = 0
+            numbers = []  # Seznam číselných řetězců
+
+            for word in words:  # Průchod všech slov
+                if len(word) > 0 and word[0].isupper():
+                    # Je první písmeno velké?
+                    title_words += 1  # Přičtení k velkým
+                if word.isupper():
+                    uppercase_words += 1
+                if word.islower():
+                    lower_words += 1
+                if word.isdigit():
+                    numbers.append(word)  # Přidání čísla do seznamu
+            
+            total = 0  # Součet čísel
+            for num in numbers:
+                total = total + int(num)  # Převod na int a sečtení
+            
+            # Délka slova
+            lengths = {}  # Slovník {délka: počet}
+            for word in words:
+                clean_word = word  # Kopie slova
+                for punctuation in ".,;:?!-(){}\"'":  # Průchod interpunkce
+                    clean_word = clean_word.replace(punctuation, "")
+                
+                length_clean_word = len(clean_word)  # Délka očištěného slova
+                if length_clean_word in lengths:  # Pokud délka existuje
+                    lengths[length_clean_word] = lengths[length_clean_word] + 1
+                    # Přičtení 1 k existující délce
+                else:
+                    lengths[length_clean_word] = 1  # Nová délka; začíná na 1
+
+               
