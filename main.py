@@ -52,7 +52,7 @@ We have {len(TEXTS)} texts to be analyzed.
     valid_number = False
     for char in choice_text:
         if not (char.isdigit()):
-            print("Letter entered!")  # Zadáno písmeno
+            print("Error! Letter entered!")  # Zadáno písmeno
             valid_number = False
             break
         else:
@@ -104,4 +104,28 @@ We have {len(TEXTS)} texts to be analyzed.
                 else:
                     lengths[length_clean_word] = 1  # Nová délka; začíná na 1
 
-               
+            # Výstup
+            print(f"""\n{'-' * 42}
+There are {number_words} words in the selected text.
+There are {title_words} titlecase words.
+There are {uppercase_words} uppercase words.
+There are {lower_words} lowercase words.
+There are {len(numbers)} numeric string.
+The sum of all the numbers {total}""")
+            
+            print(f"""{'-' * 42}
+LEN | OCCURENCES | NR.
+{'-' * 42}""")
+            
+            max_occurrence = max(lengths.values())  # Nejvyšší výskyt
+            max_width = len("*" * max_occurrence)  # Maximální šířka sloupce
+
+            for length in sorted(lengths.keys()):
+                # Vrací vzestupně položky slovníku
+                star = "*" * lengths[length]
+                # Načtení počtu výskytů aktuální délky
+                print(f"{str(length):>3} | "
+      f"{star:<{max_width}} | "
+      f"{lengths[length]}")
+    # {str(length):>3 Zarovnává doprava na šířku tří znaků
+    # {star:<{max_width}} Dynamicky nastavuje šířku dle max_width   
